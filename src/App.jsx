@@ -1,28 +1,39 @@
-import { useState } from 'react'
+import React, { useCallback, useRef } from 'react';
+import Navbar from './components/Navbar.jsx';
+import Hero from './components/Hero.jsx';
+import About from './components/About.jsx';
+import Projects from './components/Projects.jsx';
+import Contact from './components/Contact.jsx';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const containerRef = useRef(null);
+
+  const handleNavigate = useCallback((id) => {
+    const target = document.getElementById(id);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Move focus for accessibility after scrolling
+      setTimeout(() => {
+        target.focus({ preventScroll: true });
+      }, 600);
+    }
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
+    <div className="relative h-screen w-full bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+      <Navbar onNavigate={handleNavigate} />
 
-export default App
+      <main
+        ref={containerRef}
+        id="page-container"
+        className="h-screen w-full overflow-y-scroll scroll-smooth snap-y snap-mandatory"
+        aria-label="One Page Pirate Portfolio Sections"
+      >
+        <Hero onNavigate={handleNavigate} />
+        <About onNavigate={handleNavigate} />
+        <Projects />
+        <Contact />
+      </main>
+    </div>
+  );
+}
