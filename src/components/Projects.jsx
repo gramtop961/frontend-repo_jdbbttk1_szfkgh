@@ -1,42 +1,46 @@
-import React from 'react';
-
-const projects = [
-  {
-    title: 'Treasure Map Engine',
-    desc: 'Dynamic charts and routes to navigate complex data seas.',
-  },
-  {
-    title: 'Seaworthy 3D Showcase',
-    desc: 'A fleet of real-time 3D scenes optimized for calm and storm.',
-  },
-  {
-    title: 'Message in a Bottle CMS',
-    desc: 'A headless system to send content across distant shores.',
-  },
-];
-
-export default function Projects() {
+export default function Projects({ onContact }) {
   return (
     <section
-      id="projects"
+      id="treasures"
       tabIndex={-1}
-      className="relative h-screen w-full snap-start flex items-center"
+      className="relative h-screen min-h-[680px] snap-start"
       aria-label="Treasures"
     >
-      <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-3xl md:text-4xl font-semibold">Treasures</h2>
-        <p className="mt-2 text-slate-300">Spoils from voyages across code and canvas.</p>
+      <div className="mx-auto flex h-full max-w-6xl flex-col justify-center px-6">
+        <h2 className="text-3xl font-bold sm:text-4xl">Treasures</h2>
+        <p className="mt-3 text-slate-700">A curated chest of my favorite builds.</p>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p, i) => (
+          {[
+            {
+              title: 'Grand Line Dashboard',
+              desc: 'Analytics helm with interactive charts and real-time currents.',
+            },
+            {
+              title: 'Sunny Studio 3D',
+              desc: 'Immersive scene with Spline and buttery smooth camera drift.',
+            },
+            {
+              title: 'Sea Map API',
+              desc: 'FastAPI routes charting waypoints, storms, and ports of call.',
+            },
+          ].map((card) => (
             <article
-              key={i}
-              className="rounded-lg border border-slate-700/60 bg-slate-900/40 p-5 transition-colors hover:border-slate-500/60 focus-within:border-slate-500/60"
-              aria-label={p.title}
+              key={card.title}
+              className="group rounded-xl border border-slate-200 bg-white/70 p-5 shadow-sm backdrop-blur transition hover:shadow"
             >
-              <h3 className="text-xl font-semibold">{p.title}</h3>
-              <p className="mt-2 text-slate-300">{p.desc}</p>
+              <h3 className="text-lg font-semibold group-hover:text-indigo-700">{card.title}</h3>
+              <p className="mt-2 text-sm text-slate-600">{card.desc}</p>
             </article>
           ))}
+        </div>
+        <div className="mt-8">
+          <button
+            onClick={onContact}
+            className="rounded-lg bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-500"
+            aria-label="Set Sail – Explore My Treasures"
+          >
+            Set Sail – Explore My Treasures
+          </button>
         </div>
       </div>
     </section>

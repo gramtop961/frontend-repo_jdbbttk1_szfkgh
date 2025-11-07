@@ -1,44 +1,50 @@
-import React from 'react';
+import { useRef } from 'react';
 import Spline from '@splinetool/react-spline';
 
-export default function Hero({ onNavigate }) {
+export default function Hero({ onPrimary, onSecondary }) {
+  const sectionRef = useRef(null);
+
   return (
     <section
-      id="home"
+      id="captains-log"
+      ref={sectionRef}
       tabIndex={-1}
-      className="relative h-screen w-full snap-start"
-      aria-label="Captain's Deck"
+      className="relative flex h-screen min-h-[680px] snap-start items-center justify-center overflow-hidden"
+      aria-label="Captain’s Log"
     >
       <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/6yBz0nQ9BzY0cYz7/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        <Spline
+          scene="https://prod.spline.design/Qe6dlWJktclXcUBS/scene.splinecode"
+          style={{ width: '100%', height: '100%' }}
+        />
       </div>
-      <div className="relative z-10 h-full w-full flex items-center">
-        <div className="mx-auto max-w-6xl px-6">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            Captain's Log
-          </h1>
-          <p className="mt-4 max-w-xl text-slate-300">
-            Ahoy! I be Vinuthna, chartin' courses through 3D seas and web frontiers.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <button
-              onClick={() => onNavigate('projects')}
-              className="inline-flex items-center justify-center rounded-md bg-sky-500/90 hover:bg-sky-400 px-5 py-3 transition-colors focus:outline-none focus-visible:ring focus-visible:ring-sky-400"
-              aria-label="Set Sail – Explore My Treasures"
-            >
-              Set Sail – Explore My Treasures
-            </button>
-            <button
-              onClick={() => onNavigate('contact')}
-              className="inline-flex items-center justify-center rounded-md border border-sky-400/60 hover:border-sky-300/80 px-5 py-3 transition-colors focus:outline-none focus-visible:ring focus-visible:ring-sky-400"
-              aria-label="Meet the Captain – Connect Me"
-            >
-              Meet the Captain – Connect Me
-            </button>
-          </div>
+
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/70 via-white/20 to-white/80" />
+
+      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 text-center">
+        <h1 className="text-balance bg-gradient-to-br from-indigo-900 via-indigo-700 to-rose-600 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl">
+          Captain’s Log
+        </h1>
+        <p className="mt-4 max-w-prose text-base text-slate-700 sm:text-lg">
+          Set your bearings for a grand voyage across the digital seas. Explore my treasures, chart my journey, and send a seagull if you fancy a parley.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <button
+            onClick={onPrimary}
+            className="rounded-lg bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-500"
+            aria-label="Set Sail – Explore My Treasures"
+          >
+            Set Sail – Explore My Treasures
+          </button>
+          <button
+            onClick={onSecondary}
+            className="rounded-lg border border-indigo-300 bg-white/80 px-5 py-3 text-sm font-semibold text-indigo-700 shadow hover:bg-white focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-500"
+            aria-label="Meet the Captain – Connect Me"
+          >
+            Meet the Captain – Connect Me
+          </button>
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/60" />
     </section>
   );
 }
